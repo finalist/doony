@@ -322,20 +322,6 @@
 
 ;jQuery(function($) {
 
-    var colors = [
-        '#C02942', // a red
-        '#4ecdc4', // a bright green blue
-        '#d95b43', // orange
-        '#556270', // a slate color
-        '#542437', // purple
-        '#8fbe00', // lime yellow
-    ];
-
-    var Alert = {
-        ERROR : "alert-danger",
-        WARNING: "alert-warning"
-    };
-
     var getSubdomain = function(domain) {
         var parts = domain.split(".");
         if (parts.length <= 2) {
@@ -343,17 +329,6 @@
         } else {
             return parts.slice(0, -2).join(".");
         }
-    };
-
-    var hashCode = function(string) {
-        var hash = 0, i, char;
-        if (string.length === 0) return hash;
-        for (i = 0, l = string.length; i < l; i++) {
-            char  = string.charCodeAt(i);
-            hash  = ((hash<<5)-hash)+char;
-            hash |= 0; // Convert to 32bit integer
-        }
-        return hash;
     };
 
     var isJobPage = function(path) {
@@ -416,9 +391,9 @@
         }
     };
 
-    var showButterBar = function(message, alert) {
+    var showButterBar = function(message) {
         var div = document.createElement('div');
-        div.className = 'alert doony-alert ' + alert;
+        div.className = 'alert alert-warning doony-alert';
         div.innerHTML = message;
         $("#main-panel").prepend(div);
     };
@@ -427,8 +402,7 @@
     var domain = getSubdomain(window.location.hostname);
     doonyTitleLink.html("<div id='doony-title'>" + domain + "</div>");
 
-    var color = colors[Math.abs(hashCode(domain)) % colors.length];
-    $("#top-panel").css('background-color', color);
+    $("#top-panel").css('background-color', '#6C6E70');
 
     // Remove icons from the left hand menu and strip nbsp's
     $(".task").each(function() {
@@ -610,15 +584,9 @@
                     ) {
                         message += " <a href='#' id='doony-clear-build'>Cancel the current build</a>";
                     }
-                    showButterBar(message, Alert.WARNING);
+                    showButterBar(message);
                     redirectToNewJobConsole(getJobUrl(window.location.pathname),
                         data.nextBuildNumber);
-                }).fail(function(jqXHR, textStatus, errorThrown) {
-                    if (jqXHR.status === 403) {
-                        showButterBar("Cannot create build. Maybe you need to log in or have the 'build' permission.", Alert.ERROR);
-                    } else {
-                        showButterBar("An error occured. Please try again.", Alert.ERROR);
-                    }
                 });
             });
         });

@@ -1,14 +1,5 @@
 jQuery(function($) {
 
-    var colors = [
-        '#C02942', // a red
-        '#4ecdc4', // a bright green blue
-        '#d95b43', // orange
-        '#556270', // a slate color
-        '#542437', // purple
-        '#8fbe00', // lime yellow
-    ];
-
     var getSubdomain = function(domain) {
         var parts = domain.split(".");
         if (parts.length <= 2) {
@@ -16,17 +7,6 @@ jQuery(function($) {
         } else {
             return parts.slice(0, -2).join(".");
         }
-    };
-
-    var hashCode = function(string) {
-        var hash = 0, i, char;
-        if (string.length === 0) return hash;
-        for (i = 0, l = string.length; i < l; i++) {
-            char  = string.charCodeAt(i);
-            hash  = ((hash<<5)-hash)+char;
-            hash |= 0; // Convert to 32bit integer
-        }
-        return hash;
     };
 
     var isJobPage = function(path) {
@@ -100,8 +80,7 @@ jQuery(function($) {
     var domain = getSubdomain(window.location.hostname);
     doonyTitleLink.html("<div id='doony-title'>" + domain + "</div>");
 
-    var color = colors[Math.abs(hashCode(domain)) % colors.length];
-    $("#top-panel").css('background-color', color);
+    $("#top-panel").css('background-color', '#6C6E70');
 
     // Remove icons from the left hand menu and strip nbsp's
     $(".task").each(function() {
