@@ -80,8 +80,6 @@ jQuery(function($) {
     var domain = getSubdomain(window.location.hostname);
     doonyTitleLink.html("<div id='doony-title'>" + domain + "</div>");
 
-    $("#top-panel").css('background-color', '#6C6E70');
-
     // Remove icons from the left hand menu and strip nbsp's
     $(".task").each(function() {
         $("a img", $(this)).remove();
