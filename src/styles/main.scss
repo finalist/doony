@@ -1,5 +1,5 @@
-@include yui;
-@include twitter-bootstrap;
+@import 'yui';
+@import 'twitter-bootstrap';
 
 pre, code, .CodeMirror {
     font-family: Consolas, Monaco, monospace;
